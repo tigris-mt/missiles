@@ -21,14 +21,13 @@ missiles.register_hook(function(name, def)
         on_use = function(itemstack, user)
             local o = tigris.create_projectile(name .. "_projectile", {
                 pos = vector.add(user:getpos(), vector.new(0, user:get_properties().eye_height or 1.625, 0)),
-                velocity = vector.multiply(user:get_look_dir(), def.speed * 0.2),
-                -- Handheld missiles get some gravity.
-                gravity = 0.5,
+                velocity = vector.multiply(user:get_look_dir(), 20),
+                gravity = 1,
                 owner = user:get_player_name(),
                 owner_object = user,
             })
             if o then
-                o:get_luaentity().timeout_override = 30
+                o:get_luaentity()._timeout_override = 30
             end
             return ItemStack("missiles:handheld")
         end,

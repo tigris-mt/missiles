@@ -1,4 +1,6 @@
-missiles = {}
+missiles = {
+    missiles = {},
+}
 
 function missiles.register(name, def)
     local p = name .. "_projectile"
@@ -25,6 +27,8 @@ function missiles.register(name, def)
         inventory_image = def.image,
         groups = {missile = 1},
     })
+
+    missiles.missiles[name] = def
     missiles.hook(name, def)
 end
 

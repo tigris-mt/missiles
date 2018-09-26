@@ -18,7 +18,6 @@ morebombs.register_hook(function(name, def)
     missiles.register(mn, {
         description = def.description .. " Missile",
         image = "missiles_missile.png^(" .. def.tiles[1] .. "^[resize:16x16)",
-        speed = 100,
         action = function(pos, mdef, data)
             -- Activate payload, default orientation down.
             def.action(pos, def, (data and data.facedir) or 4)
