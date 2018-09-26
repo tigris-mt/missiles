@@ -8,14 +8,14 @@ function missiles.register(name, def)
         load_map = true,
         draw_distance = 3000,
         on_any_hit = function(self)
-            if self.last_air then
-                def.action(self.last_air, def, self.missile_data)
+            if self._last_air then
+                def.action(self._last_air, def, self.missile_data)
             end
             return true
         end,
         on_timeout = function(self)
-            if self.last_air then
-                def.action(self.last_air, def, self.missile_data)
+            if self._last_air then
+                def.action(self._last_air, def, self.missile_data)
             end
             return true
         end,

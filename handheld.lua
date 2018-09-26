@@ -23,7 +23,7 @@ missiles.register_hook(function(name, def)
                 pos = vector.add(user:getpos(), vector.new(0, user:get_properties().eye_height or 1.625, 0)),
                 velocity = vector.multiply(user:get_look_dir(), def.speed * 0.2),
                 -- Handheld missiles get some gravity.
-                gravity = 0.2,
+                gravity = 0.5,
                 owner = user:get_player_name(),
                 owner_object = user,
             })
