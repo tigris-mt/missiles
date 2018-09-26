@@ -27,6 +27,9 @@ missiles.register_hook(function(name, def)
                 owner = user:get_player_name(),
                 owner_object = user,
             })
+            if o then
+                o:get_luaentity().timeout_override = 30
+            end
             return ItemStack("missiles:handheld")
         end,
     })

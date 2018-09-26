@@ -13,6 +13,12 @@ function missiles.register(name, def)
             end
             return true
         end,
+        on_timeout = function(self)
+            if self.last_air then
+                def.action(self.last_air, def, self.missile_data)
+            end
+            return true
+        end,
     })
     minetest.register_craftitem(":" .. name, {
         description = def.description,
