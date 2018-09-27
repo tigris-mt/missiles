@@ -92,12 +92,12 @@ minetest.register_craft{
 }
 
 local facedirs = {
-    ["+x"] = 0,
-    ["+y"] = 1,
-    ["+z"] = 2,
+    ["+x"] = 1,
+    ["+y"] = 6,
+    ["+z"] = 0,
     ["-x"] = 3,
     ["-y"] = 4,
-    ["-z"] = 5,
+    ["-z"] = 2,
 }
 
 function missiles.register_launcher(name, def)
