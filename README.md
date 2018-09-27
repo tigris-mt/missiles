@@ -18,7 +18,7 @@ Blow up the world from a distance.
 * `{type = "getinfo"}`
 ### Responses
 * `{type = "launched", target = <vector>}`
-* `{type = "info", cooldown = 4.483, ammo = {name = "tnt:tnt_missile", count = 12}, powered = true}`
+* `{type = "info", cooldown = 4, ammo = {name = "tnt:tnt_missile", count = 12}, powered = true}`
 ### Errors
 * `{type = "error", error = "protocol"}`
 * `{type = "error", error = "ammo", target = <vector>}`
