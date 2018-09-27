@@ -13,8 +13,8 @@ Blow up the world from a distance.
 
 ### Actions
 * `{type = "launch", target = <vector>}`
- * Optional `direction = "+x"` (or `+y`, `-z`, etc.) argument will apply drill rotation towards the specified coordinate if applicable.
- * Optional `mode = x` where x can be `normal`, `short`, or `long` to control the missile path.
+  * Optional `direction = "+x"` (or `+y`, `-z`, etc.) argument will apply drill rotation towards the specified coordinate if applicable.
+  * Optional `mode = x` where x can be `normal`, `short`, or `long` to control the missile path.
 * `{type = "getinfo"}`
 ### Responses
 * `{type = "launched", target = <vector>}`
