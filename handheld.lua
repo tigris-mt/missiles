@@ -1,5 +1,5 @@
 minetest.register_craftitem("missiles:handheld", {
-    description = "Handheld Launcher",
+    description = "Handheld Launcher (combine with missile)",
     inventory_image = "missiles_handheld.png",
 })
 
@@ -17,6 +17,7 @@ missiles.register_hook(function(name, def)
     minetest.register_tool(":" .. mn, {
         description = def.description .. " Handheld Launcher",
         inventory_image = def.image .. "^missiles_handheld.png",
+        groups = {not_in_creative_inventory = 1},
 
         on_use = function(itemstack, user)
             local o = tigris.create_projectile(name .. "_projectile", {
