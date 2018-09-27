@@ -249,3 +249,23 @@ minetest.register_craft{
         {"technic:green_energy_crystal", "technic:mv_transformer", "technic:control_logic_unit"},
     },
 }
+
+missiles.register_launcher("missiles:reinforced_launcher", {
+    description = "Reinforced Missile Launcher",
+    tiles = {"missiles_simple_launcher.png^missiles_reinforced.png"},
+    active_tiles = {"missiles_simple_launcher_active.png^missiles_reinforced.png"},
+
+    speed = 55,
+    demand = 200 * 1000,
+    cooldown = 35,
+    class = "hv",
+})
+
+minetest.register_craft{
+    output = "missiles:reinforced_launcher",
+    recipe = {
+        {"technic:blast_resistant_concrete", "technic:brass_block", "technic:blast_resistant_concrete"},
+        {"technic:stainless_steel_block", "missiles:simple_launcher", "technic:stainless_steel_block"},
+        {"technic:green_energy_crystal", "technic:hv_transformer", "technic:green_energy_crystal"},
+    },
+}
