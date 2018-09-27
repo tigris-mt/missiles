@@ -235,9 +235,9 @@ missiles.register_launcher("missiles:simple_launcher", {
     tiles = {"missiles_simple_launcher.png"},
     active_tiles = {"missiles_simple_launcher_active.png"},
 
-    speed = 40,
+    speed = 30,
     demand = 90 * 1000,
-    cooldown = 30,
+    cooldown = 20,
     class = "mv",
 })
 
