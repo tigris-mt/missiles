@@ -193,15 +193,19 @@ function missiles.register_launcher(name, def)
                                 cooldown = def.cooldown - cooldown(meta),
                                 ammo = ammo and {name = ammo:get_name(), count = ammo:get_count()},
                                 powered = active,
+                                max_count = def.max_count,
                             })
                         elseif msg.type == "launch" then
                             if type(msg.target) ~= "table" or type(msg.target.x) ~= "number" or type(msg.target.y) ~= "number" or type(msg.target.z) ~= "number" then
                                 return reply(pos, {type = "error", error = "protocol"})
                             end
+
+                            local count = math.max(1, math.min(tonumber(msg.count) or 1, def.max_count))
+
                             if not active then
                                 return reply(pos, {type = "error", error = "power", target = msg.target})
                             end
-                            if not tower or not ammo or ammo:get_count() < 1 then
+                            if not tower or not ammo or ammo:get_count() < count then
                                 return reply(pos, {type = "error", error = "ammo", target = msg.target})
                             end
                             if cooldown(meta) < def.cooldown then
@@ -213,7 +217,14 @@ function missiles.register_launcher(name, def)
                                 return reply(pos, {type = "error", error = "distance", target = msg.target})
                             end
 
-                            tower:remove_item("main", ItemStack(ammo:get_name()))
+                            local remaining = count - 1
+                            for i = remaining,1,-1 do
+                                minetest.after(i * 0.25, function()
+                                    missiles.launch(vector.add(above, vector.new(0, 1, 0)), msg.target, ammo:get_name(), def.speed, msg.mode, facedirs[msg.facedir])
+                                end)
+                            end
+
+                            tower:remove_item("main", ItemStack(ammo:get_name() .. " " .. count))
                             meta:set_int(class.uc .. "_EU_demand", def.demand)
                             reply(pos, {type = "launched", target = msg.target})
                             meta:set_int("last", os.time())
@@ -239,6 +250,7 @@ missiles.register_launcher("missiles:simple_launcher", {
     demand = 90 * 1000,
     cooldown = 20,
     class = "mv",
+    max_count = 1,
 })
 
 minetest.register_craft{
@@ -259,6 +271,7 @@ missiles.register_launcher("missiles:reinforced_launcher", {
     demand = 200 * 1000,
     cooldown = 35,
     class = "hv",
+    max_count = 1,
 })
 
 minetest.register_craft{
@@ -267,5 +280,25 @@ minetest.register_craft{
         {"technic:blast_resistant_concrete", "technic:brass_block", "technic:blast_resistant_concrete"},
         {"technic:stainless_steel_block", "missiles:simple_launcher", "technic:stainless_steel_block"},
         {"technic:green_energy_crystal", "technic:hv_transformer", "technic:green_energy_crystal"},
+    },
+}
+
+missiles.register_launcher("missiles:bulk_launcher", {
+    description = "Bulk Missile Launcher",
+    tiles = {"missiles_simple_launcher.png^missiles_bulk.png"},
+    active_tiles = {"missiles_simple_launcher_active.png^missiles_bulk.png"},
+
+    speed = 55,
+    demand = 700 * 1000,
+    cooldown = 40,
+    class = "hv",
+    max_count = 5,
+})
+
+minetest.register_craft{
+    output = "missiles:bulk_launcher",
+    recipe = {
+        {"technic:control_logic_unit", "missiles:reinforced_launcher", "technic:control_logic_unit"},
+        {"technic:hv_transformer", "technic:hv_transformer", "technic:hv_transformer"},
     },
 }
