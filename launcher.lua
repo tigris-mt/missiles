@@ -210,7 +210,7 @@ function missiles.register_launcher(name, def)
 
                             local ok = missiles.launch(vector.add(above, vector.new(0, 1, 0)), msg.target, ammo:get_name(), def.speed, msg.mode, facedirs[msg.facedir])
                             if not ok then
-                                reply(pos, {type = "error", error = "distance", target = msg.target})
+                                return reply(pos, {type = "error", error = "distance", target = msg.target})
                             end
 
                             tower:remove_item("main", ItemStack(ammo:get_name()))
