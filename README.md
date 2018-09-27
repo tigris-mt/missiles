@@ -22,7 +22,7 @@ Blow up the world from a distance.
 ### Errors
 * `{type = "error", error = "protocol"}`
 * `{type = "error", error = "ammo", target = <vector>}`
- * Appears when there is either no tower or no missiles in the tower.
+  * Appears when there is either no tower or no missiles in the tower.
 * `{type = "error", error = "power", target = <vector>}`
 * `{type = "error", error = "distance", target = <vector>}`
 * `{type = "error", error = "cooldown", target = <vector>}`
