@@ -121,7 +121,7 @@ function missiles.register_launcher(name, def)
         end
 
         local function cooldown(meta)
-            return os.time() - meta:get_int("last")
+            return minetest.get_gametime() - meta:get_int("last")
         end
 
         minetest.register_node(n, {
@@ -227,7 +227,7 @@ function missiles.register_launcher(name, def)
                             tower:remove_item("main", ItemStack(ammo:get_name() .. " " .. count))
                             meta:set_int(class.uc .. "_EU_demand", def.demand)
                             reply(pos, {type = "launched", target = msg.target})
-                            meta:set_int("last", os.time())
+                            meta:set_int("last", minetest.get_gametime())
                         end
                     end,
                 },
