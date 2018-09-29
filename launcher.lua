@@ -70,9 +70,9 @@ minetest.register_node("missiles:launcher_tower", {
             return inv:add_item("main",stack)
         end,
         can_insert = function(pos, node, stack, direction)
-                local meta = minetest.get_meta(pos)
-                local inv = meta:get_inventory()
-                return inv:room_for_item("main", stack)
+            local meta = minetest.get_meta(pos)
+            local inv = meta:get_inventory()
+            return (minetest.get_item_group(stack:get_name(), "missile") or 0) > 0 and inv:room_for_item("main", stack)
         end,
         input_inventory = "main",
         connect_sides = {left=1, right=1, front=1, back=1, bottom=1},
